@@ -1,0 +1,87 @@
+# menggolek emas rek
+
+import sys as s
+
+r, c, N = map(int, input().split())    # input luas peta
+peta = []   # peta matriks kosong
+posisi = (0, 0)
+gold = 0
+
+if (r < 1) and (c < 1): # cek batasan yang diberikan pada M dan N
+    print("nilai M atau N tidak valid!")
+    s.exit()
+else:
+    for i in range(r):
+        baris_peta = input().split(" ") # memasukkan input kedalam peta matriks
+        peta.append(baris_peta)
+
+arah_gerakkan = input()
+counter_gerakkan = 0
+
+baris, kolom = posisi       # memasukkan nilai gold di lokasi (0, 0)
+gold += int(peta[baris][kolom])
+
+for i in arah_gerakkan:
+    if counter_gerakkan <= N:
+        if i == "D":
+            posisi = (posisi[0] + 1, posisi[1])
+            if posisi[0] > r-1:
+                print("gerakanmu salah bung!")
+                posisi = (posisi[0] - 1, posisi[1])
+                print(gold)
+                s.exit()
+            baris, kolom = posisi
+            gold += int(peta[baris][kolom])
+            peta[baris][kolom] = "0"
+            gold -= 2
+            if gold < 0:
+                gold = 0
+            counter_gerakkan += 1
+        elif i == "U":
+            posisi = (posisi[0] - 1, posisi[1])
+            if posisi[0] < 0:
+                print("gerakanmu salah bung!")
+                posisi = (posisi[0] + 1, posisi[1])
+                print(gold)
+                s.exit()
+            baris, kolom = posisi
+            gold += int(peta[baris][kolom])
+            peta[baris][kolom] = "0"
+            gold += 3
+            if gold < 0:
+                gold = 0
+            counter_gerakkan += 1
+        elif i == "R":
+            posisi = (posisi[0], posisi[1] + 1)
+            if posisi [1] > c-1:
+                print("gerakanmu salah bung!")
+                posisi = (posisi[0], posisi[1] - 1)
+                print(gold)
+                s.exit()
+            baris, kolom = posisi
+            gold += int(peta[baris][kolom])
+            peta[baris][kolom] = "0"
+            gold += 3
+            if gold < 0:
+                gold = 0
+            counter_gerakkan += 1
+        elif i == "L":
+            posisi = (posisi[0], posisi[1] - 1)
+            if posisi[1] < 0:
+                print("gerakanmu salah bung!")
+                posisi = (posisi[0], posisi[1] + 1)
+                print(gold)
+                s.exit()
+            baris, kolom = posisi
+            gold += int(peta[baris][kolom])
+            peta[baris][kolom] = "0"
+            gold -= 2
+            if gold < 0:
+                gold = 0
+            counter_gerakkan += 1
+    else:
+        break
+        
+print(gold)
+for i in range(r):
+    print(peta[i])
