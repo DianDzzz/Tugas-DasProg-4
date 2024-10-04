@@ -1,0 +1,36 @@
+# tumbas mercon sek rek :skull:
+
+import sys as s
+
+N, M = map(int, input().split())
+if N < 1 or N > 10**4:
+    print("nilai N tidak valid!")
+    s.exit()
+elif M < 1 or M > 10**4:
+    print("nilai M tidak valid!")
+    s.exit()
+else:
+    P = input().split(" ")
+    isi_P = [int(i) for i in P]
+    if len(isi_P) != N:
+        print("jumlah P tidak valid!")
+        s.exit()
+
+    C = input().split(" ")
+    isi_C = [int(i) for i in C]
+    if len(isi_C) != M:
+        print("jumlah C tidak valid!")
+        s.exit()
+
+    harga = 0
+    for i in range(N):
+        if int(P[i]) > 0:
+            harga -= int(P[i])
+    
+    uang = 0
+    for i in range(M):
+        if int(C[i]) < 0:
+            uang += int(C[i])
+
+    hutang = harga + uang
+    print(hutang)
