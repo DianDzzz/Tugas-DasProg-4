@@ -1,0 +1,24 @@
+# tuku buah rek :yum:
+
+import sys as s
+
+jumlah_buah = 0 
+N, K = map(int, input().split())
+if N < 1 or N > 10**5:
+    print("nilai N tidak valid!")
+    s.exit()
+elif K < 1 or K > 10**12:
+    print("nilai K tidak valid!")
+    s.exit()
+else:
+    A = []
+    isi_A = input().split(" ") # memasukkan input harga buah
+    A.append(isi_A)
+    if len(isi_A) != N:
+        print("jumlah harga tidak sama dengan N!")
+        s.exit()
+    else:
+        for i in range(N):
+            if K >= int(A[0][i]):
+                jumlah_buah += 1
+        print(jumlah_buah)
