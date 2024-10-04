@@ -1,0 +1,46 @@
+# daftar jeneng wong
+
+import sys as s
+
+N, r, c = map(int, input().split()) # input N sebagai jumlah murid, r sebagai baris, dan c sebagai kolom
+peta = [[0 for i in range(r)] for i in range(c)]
+
+if N > r*c:
+    print("Jumlah murid lebih banyak dari jumlah kursi!")   # cek apakah jumlah murid lebih dari jumlah kursi
+    s.exit()
+else:    
+    for i in range(N):
+        no_murid, a, b = map(int, input().split(" "))       # input no urut murid dan lokasi tempat duduk
+        if a > r or b > c or a < 1 or b < 1:                # cek batasan a dan b 1<=a<=r dan 1<=b<=c   
+            print("lokasi bangku tidak valid!")
+            s.exit()
+        else:
+            peta[a-1][b-1] = no_murid
+
+    for i in range(N):
+        for j in range(r):
+            for k in range(c):
+                if peta[j][k] == i + 1:
+                    if k+1 == c:
+                        if peta[j][k - 1] != 0:
+                            print(peta[j][k - 1])
+                        elif peta[j][k - 1] == 0:
+                            print("0")
+                    elif k == 0:
+                        if peta[j][k + 1] != 0:
+                            print(peta[j][k + 1])
+                        elif peta[j][k + 1] == 0:
+                            print("0")
+                    else:
+                        if peta[j][k + 1] != 0:
+                            print(peta[j][k + 1])
+                        elif peta[j][k - 1] != 0:
+                            print(peta[j][k - 1])
+                        elif peta[j][k + 1] == 0:
+                            print("0")
+                        elif peta[j][k - 1] == 0:
+                            print("0")
+
+print()
+for i in range(r):
+    print(peta[i])
